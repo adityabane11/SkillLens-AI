@@ -1,0 +1,32 @@
+text,label
+"Python developer with Flask REST API SQL Git and problem solving experience. Built web applications and worked with MySQL.",RELEVANT
+"Machine learning student with Python pandas scikit-learn SQL and data analysis experience. Built classification projects.",RELEVANT
+"Frontend developer with HTML CSS JavaScript React Git and responsive web development experience.",RELEVANT
+"Java developer with OOP SQL Git REST API and database development experience.",RELEVANT
+"Data analyst with Python pandas NumPy SQL data visualization and communication skills.",RELEVANT
+"Backend engineer with Python Flask REST API MySQL Git Docker and Linux experience.",RELEVANT
+"NLP student with Python machine learning scikit-learn natural language processing and data analysis projects.",RELEVANT
+"Web developer with HTML CSS JavaScript Node.js Git and teamwork experience.",RELEVANT
+"Software engineer with Java Python SQL Git problem solving and agile teamwork experience.",RELEVANT
+"ML engineer with Python pandas NumPy TensorFlow machine learning and deep learning experience.",RELEVANT
+"Python intern with Flask SQL Git and communication skills who developed a student dashboard.",RELEVANT
+"Full stack developer with HTML CSS JavaScript React Node.js MongoDB REST API and Git.",RELEVANT
+"Computer science student with Python Java SQL Git and machine learning coursework.",RELEVANT
+"Cloud developer with Python Docker Linux AWS Git and REST API experience.",RELEVANT
+"Data science intern with Python pandas scikit-learn SQL and data visualization.",RELEVANT
+"React developer with JavaScript HTML CSS REST API Git and teamwork experience.",RELEVANT
+"Graphic designer experienced with illustration typography Photoshop branding and visual composition.",NOT_RELEVANT
+"Biology student with laboratory research genetics microscopy and cell culture experience.",NOT_RELEVANT
+"History student with archival research writing cultural studies and museum documentation.",NOT_RELEVANT
+"Marketing assistant with social media campaigns copywriting advertising and market research.",NOT_RELEVANT
+"Hospitality professional with hotel operations guest services reservations and event coordination.",NOT_RELEVANT
+"Teacher experienced in classroom management lesson planning child development and assessment.",NOT_RELEVANT
+"Mechanical technician with welding machining maintenance and equipment inspection experience.",NOT_RELEVANT
+"Fashion designer with garment construction textile selection sketching and pattern making.",NOT_RELEVANT
+"Journalism student with reporting interviews news writing editing and media production.",NOT_RELEVANT
+"Accountant with bookkeeping payroll taxation auditing and financial reporting experience.",NOT_RELEVANT
+"Photographer with studio lighting portrait photography editing and visual storytelling.",NOT_RELEVANT
+"Architectural student with AutoCAD building design drafting site planning and construction documentation.",NOT_RELEVANT
+"Chef with food preparation kitchen management menu planning and restaurant operations.",NOT_RELEVANT
+"Psychology student with counselling theory behavioral research surveys and observation.",NOT_RELEVANT
+"Legal intern with case research contracts legal writing documentation and court procedures.",NOT_RELEVANT

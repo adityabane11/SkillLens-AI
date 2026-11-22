@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101322">
+<title>SkillLens AI — Resume Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="SkillLens AI home"><span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5 9.2 12l3.2 3.1L20 6.5"/><path d="M14.8 6.5H20v5.2"/></svg></span><span>skill<span class="brand-accent">lens</span><small>AI</small></span></a>
+  <div class="topbar-right"><span class="status-dot"></span><span>AI WORKSPACE</span><span class="top-divider"></span><span class="prototype-pill">ACADEMIC PROTOTYPE</span></div>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="eyebrow-line"></span> RESUME INTELLIGENCE, REIMAGINED</div>
+    <h1>Find the fit.<br><span>Close the gap.</span></h1>
+    <p>Turn a resume and job description into a clear, actionable picture of role alignment — with skill matching and learning suggestions in one place.</p>
+    <div class="hero-points"><span><i>✓</i> Skill-level insights</span><span><i>✓</i> Explainable results</span><span><i>✓</i> Practical next steps</span></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+    <div class="art-core"><div class="core-icon">✳</div><span>SKILL<br>INTELLIGENCE</span><div class="core-wave"></div></div>
+    <div class="float-card float-top"><span class="float-icon purple-icon">↗</span><div><small>ROLE ALIGNMENT</small><strong>Clarity, not guesswork</strong></div></div>
+    <div class="float-card float-bottom"><span class="float-icon green-icon">✓</span><div><small>YOUR NEXT STEP</small><strong>Learn with direction</strong></div></div>
+  </div>
+</section>
+
+<section class="workspace" id="analyzer">
+  <div class="section-heading"><div><div class="section-kicker">01 / INPUTS</div><h2>Build your analysis</h2><p>Bring the role and resume together. We’ll take it from there.</p></div><div class="step-indicator"><span class="step-active">01</span><span class="step-track"></span><span>02</span><span class="step-track"></span><span>03</span></div></div>
+  {% if error %}<div class="alert"><span class="alert-symbol">!</span><span>{{ error }}</span></div>{% endif %}
+  <form method="post" enctype="multipart/form-data" id="analysis-form">
+    <div class="input-grid">
+      <section class="input-card resume-card">
+        <div class="card-top"><div class="field-icon">▤</div><div><h3>Upload your resume</h3><p>Give your experience a closer look.</p></div><span class="required-tag">REQUIRED</span></div>
+        <label class="dropzone" id="dropzone" for="resume-file">
+          <input id="resume-file" type="file" name="resume" accept=".pdf,.docx,.txt" required>
+          <span class="upload-visual"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4"/></svg></span>
+          <strong id="file-title">Drop your resume here</strong><span id="file-subtitle">or <em>browse files</em> from your device</span><span class="file-types"><b>PDF</b><b>DOCX</b><b>TXT</b><span>Max 8 MB</span></span>
+        </label>
+        <div class="privacy-note"><span>⌑</span> Your file is processed by this local prototype and isn’t saved by the app intentionally.</div>
+      </section>
+      <section class="input-card job-card">
+        <div class="card-top"><div class="field-icon">⌘</div><div><h3>Target job description</h3><p>What does the role need?</p></div><span class="required-tag">REQUIRED</span></div>
+        <label class="sr-only" for="job-description">Paste the target job description</label>
+        <textarea id="job-description" name="job_description" rows="8" maxlength="12000" placeholder="Paste the job description here — responsibilities, skills, tools, and qualifications..." required>{{ job_text }}</textarea>
+        <div class="textarea-meta"><span id="description-hint">Include technical skills for a more useful comparison.</span><span><b id="char-count">{{ job_text|length }}</b> / 12,000</span></div>
+        <button type="button" class="text-button" id="sample-button">✦ Use sample job description</button>
+        <textarea id="sample-job" hidden>{{ sample_job_description }}</textarea>
+      </section>
+    </div>
+    <div class="form-footer"><div class="form-footnote"><span class="info-icon">i</span><span>Best results come from a readable resume and a specific job description.</span></div><button type="submit" class="primary-button" id="analyze-button"><span class="button-label">Analyze resume</span><span class="button-arrow">↗</span></button></div>
+  </form>
+</section>
+
+{% if result %}
+<section class="results-section" id="results">
+  <div class="section-heading result-heading"><div><div class="section-kicker">02 / YOUR REPORT</div><h2>Here’s the bigger picture.</h2><p>Analysis complete for <strong>{{ resume_name }}</strong></p></div><button class="secondary-button" id="download-report" type="button"><span>↓</span> Export report</button></div>
+  <div class="metrics">
+    <article class="metric-card alignment-card"><div class="metric-top"><span>WEIGHTED ROLE COVERAGE</span><span class="metric-symbol">◉</span></div><div class="coverage-row"><strong>{{ result.coverage }}<small>%</small></strong><div class="coverage-ring" style="--coverage:{{ result.coverage }}%"><span>↗</span></div></div><div class="progress-track"><span style="width:{{ result.coverage }}%"></span></div><p>{{ result.matched|length }} of {{ (result.matched|length + result.missing|length) }} identified role skills matched{% if result.required_coverage is not none %}; required-skill coverage: {{ result.required_coverage }}%{% endif %}</p></article>
+    <article class="metric-card"><div class="metric-top"><span>ML SCREENING LABEL</span><span class="metric-symbol purple-symbol">✳</span></div><strong class="metric-label">{{ result.ml.label|replace('_',' ')|title }}</strong><p class="metric-description">Model confidence: <b>{{ result.ml.confidence }}%</b></p><div class="mini-tag">TF-IDF + Logistic Regression</div></article>
+    <article class="metric-card"><div class="metric-top"><span>POTENTIAL SKILL GAPS</span><span class="metric-symbol amber-symbol">↗</span></div><strong class="big-number">{{ result.missing|length }}</strong><p class="metric-description">Areas to explore against this role</p><button class="mini-tag amber-tag roadmap-trigger" type="button" {% if result.missing %}data-skill="{{ result.missing[0]|e }}"{% else %}disabled{% endif %}>{% if result.missing %}A roadmap starts here ↗{% else %}No gaps detected{% endif %}</button></article>
+  </div>
+  <div class="insights-grid">
+    <article class="report-card">
+      <div class="report-card-heading"><div><div class="section-kicker">YOUR STRENGTHS</div><h3>Matched skills <span class="count-badge green-badge">{{ result.matched|length }}</span></h3></div><span class="heading-glyph green-glyph">✓</span></div>
+      <p class="card-description">Skills found in both your resume and the job description. Required skills carry more weight than preferred skills.</p>
+      <div class="chips">{% for s in result.matched %}<span class="skill-chip matched-chip"><i>✓</i>{{ s }}</span>{% else %}<p class="empty-state">No overlapping skills were detected. Try a more detailed job description.</p>{% endfor %}</div>
+    </article>
+    <article class="report-card">
+      <div class="report-card-heading"><div><div class="section-kicker">OPPORTUNITIES</div><h3>Skills to build <span class="count-badge amber-badge">{{ result.missing|length }}</span></h3></div><span class="heading-glyph amber-glyph">↗</span></div>
+      <p class="card-description">Skills mentioned in the role but not detected in the resume text. These are text-matching signals, not proof that you lack a skill.</p>
+      <div class="chips">{% for s in result.missing %}<button class="skill-chip gap-chip roadmap-skill-button" type="button" data-skill="{{ s|e }}" aria-label="Open learning roadmap for {{ s|e }}">{{ s }} <span aria-hidden="true">↗</span></button>{% else %}<p class="empty-state">No potential gaps detected from the current skill list.</p>{% endfor %}</div>
+    </article>
+  </div>
+  {% if result.required or result.preferred %}
+  <div class="insights-grid requirement-grid">
+    <article class="report-card">
+      <div class="report-card-heading"><div><div class="section-kicker">ROLE PRIORITIES</div><h3>Required skills <span class="count-badge">{{ result.required|length }}</span></h3></div></div>
+      <p class="card-description">{% if result.labelled_sections %}Detected from the job description’s required/must-have section.{% else %}No explicit required/preferred headings were found, so detected skills are treated as equally important.{% endif %}</p>
+      <div class="chips">{% for s in result.required %}<span class="skill-chip {% if s in result.matched_required %}matched-chip{% else %}gap-chip{% endif %}">{{ '✓ ' if s in result.matched_required else '• ' }}{{ s }}</span>{% else %}<p class="empty-state">No required skills were detected.</p>{% endfor %}</div>
+    </article>
+    <article class="report-card">
+      <div class="report-card-heading"><div><div class="section-kicker">EXTRA ADVANTAGES</div><h3>Preferred skills <span class="count-badge">{{ result.preferred|length }}</span></h3></div></div>
+      <p class="card-description">Skills marked as preferred or nice-to-have in the job description.</p>
+      <div class="chips">{% for s in result.preferred %}<span class="skill-chip {% if s in result.matched_preferred %}matched-chip{% else %}gap-chip{% endif %}">{{ '✓ ' if s in result.matched_preferred else '• ' }}{{ s }}</span>{% else %}<p class="empty-state">No preferred-skill section detected. Add one to compare priorities separately.</p>{% endfor %}</div>
+    </article>
+  </div>
+  {% endif %}
+  <article class="report-card recommendations-card">
+    <div class="report-card-heading"><div><div class="section-kicker">03 / YOUR NEXT MOVES</div><h3>A learning roadmap</h3></div><span class="roadmap-count">{{ result.recommendations|length }} suggestions</span></div>
+    <p class="card-description">Small, practical steps to help you explore the skills this role asks for.</p>
+    {% if result.recommendations %}
+    <div class="recommendation-list">{% for skill,tip in result.recommendations %}<div class="recommendation-item"><span class="rec-number">{{ "%02d"|format(loop.index) }}</span><div class="rec-content"><strong>{{ skill|title }}</strong><p>{{ tip }}</p></div><button class="copy-tip" type="button" data-copy="{{ (skill|title ~ ': ' ~ tip)|e }}" aria-label="Copy recommendation">Copy</button></div>{% endfor %}</div>
+    {% else %}<div class="empty-roadmap"><span>✦</span><div><strong>Nothing obvious to close right now</strong><p>No missing skills were detected in the current taxonomy. You can still deepen your existing skills.</p></div></div>{% endif %}
+  </article>
+  <div class="method-note"><span class="method-icon">i</span><div><strong>How to read this report</strong><p>This is an academic prototype, not a hiring decision. Skill matching uses a curated keyword taxonomy and aliases, so context and wording variations can still be missed. When the job description labels required and preferred sections, required skills receive greater weight. The ML label is a text-classification indicator trained on a small synthetic dataset; its confidence is not a candidate-quality score.</p></div></div>
+</section>
+{% endif %}
+<section class="how-it-works"><div class="section-kicker">A LITTLE TRANSPARENCY</div><h2>Simple inputs. Clearer next steps.</h2><div class="process-grid"><div><span class="process-number">01</span><h3>Read</h3><p>Extract text from a PDF, DOCX, or TXT resume.</p></div><div><span class="process-number">02</span><h3>Compare</h3><p>Compare detected skills with the target role’s requirements.</p></div><div><span class="process-number">03</span><h3>Guide</h3><p>Show potential gaps and practical learning suggestions.</p></div></div></section>
+<footer><a class="footer-brand" href="/">skill<span>lens</span> AI</a><span>Built for learning, experimentation, and better career clarity.</span><a href="#analyzer">Back to analyzer ↑</a></footer>
+</main>
+<div class="roadmap-modal" id="roadmap-modal" hidden>
+  <div class="roadmap-backdrop" data-close-roadmap></div>
+  <section class="roadmap-dialog" role="dialog" aria-modal="true" aria-labelledby="roadmap-title" aria-describedby="roadmap-intro">
+    <button class="roadmap-close" type="button" aria-label="Close roadmap" data-close-roadmap>×</button>
+    <div class="section-kicker">PERSONAL SKILL PLAN</div>
+    <h2 id="roadmap-title">Your learning roadmap</h2>
+    <p id="roadmap-intro" class="roadmap-intro">A practical plan based on a skill mentioned in the job description but not detected in your resume.</p>
+    <div class="roadmap-progress-row"><span id="roadmap-progress-label">0 of 4 steps complete</span><strong id="roadmap-progress-percent">0%</strong></div>
+    <div class="roadmap-progress-track"><span id="roadmap-progress-fill"></span></div>
+    <div id="roadmap-steps" class="roadmap-steps"></div>
+    <p class="roadmap-disclaimer">Use this as a study guide, not a judgement of your ability. The system may miss skills that are not explicitly written in your resume.</p>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

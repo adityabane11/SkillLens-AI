@@ -1,0 +1,6 @@
+Evaluation on a 25% stratified hold-out test split (random_state=42)
+test_samples: 8
+accuracy: 0.875
+precision: 0.8
+recall: 1.0
+f1: 0.889

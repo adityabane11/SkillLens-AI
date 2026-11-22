@@ -1,0 +1,15 @@
+ADITYA BANE
+Junior Developer | Student
+
+SUMMARY
+Computer science student interested in Python development, web applications and data analysis.
+
+SKILLS
+Python, HTML, CSS, SQL, Git, communication, problem solving, teamwork, pandas, data analysis.
+
+PROJECTS
+StudyFlow Dashboard: responsive student dashboard using HTML, CSS and JavaScript.
+Nexa Landing Page: responsive landing page using HTML and CSS.
+
+EDUCATION
+B.Tech Computer Science and Engineering — Artificial Intelligence and Machine Learning.

@@ -1,0 +1,5 @@
+Junior Python Developer
+
+We are looking for a developer to build web applications and REST API services.
+Required skills: Python, Flask, REST API, SQL, MySQL, Git, GitHub, HTML, CSS,
+JavaScript, problem solving, communication, pandas and data analysis.
