@@ -1,0 +1,17 @@
+SKILLLENS AI — START HERE (WINDOWS)
+
+1. Extract this ZIP to a folder.
+2. Open that extracted folder in VS Code.
+3. Open Terminal > New Terminal. Check that the terminal folder contains app.py and requirements.txt.
+4. Run:
+   py -m venv .venv
+   .\.venv\Scripts\python.exe -m pip install --upgrade pip
+   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+   .\.venv\Scripts\python.exe app.py
+5. Open http://127.0.0.1:5000 in Chrome.
+
+If `py` is unavailable but `python` works, replace `py` with `python` in the first command.
+If the app starts but the browser page does not open automatically, enter the URL above yourself.
+To test it, upload data/sample_resume.txt and use the sample job-description button.
+
+Keep the terminal open while using the website. Press Ctrl+C in the terminal to stop the server.
